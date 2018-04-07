@@ -14,6 +14,10 @@ function loadEventListeners(){
   form.addEventListener('submit', addTask);
   // Remove task event
   taskListUl.addEventListener('click', removeTask);
+  // Clear task event
+  clearBtn.addEventListener('click', clearTasks);
+  // Filter task events
+  filterBtn.addEventListener('keyup', filterTasks)
 }
 
 // Add Task Function - user msg if empty
@@ -57,3 +61,10 @@ function removeTask(e) {
     }
   }
 }
+
+// Clear Tasks - while loop may be faster
+function clearTask (){
+  taskListUl.innerHTML = "";
+}
+
+// Filter Tasks
