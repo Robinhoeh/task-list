@@ -63,8 +63,22 @@ function removeTask(e) {
 }
 
 // Clear Tasks - while loop may be faster
-function clearTask (){
+function clearTasks (){
   taskListUl.innerHTML = "";
 }
 
 // Filter Tasks
+function filterTasks(e) {
+  const text = e.target.value.toLowerCase();
+
+  document.querySelectorAll('.collection-item').forEach(
+    function (task) {
+    const item = task.firstChild.textContent;
+    if(item.toLowerCase().indexOf(text) != -1) {
+      task.style.display = "block";
+      task.style.backgroundColor = "#99d8ef";
+    } else {
+      task.style.display = "none";
+    }
+  });
+}
