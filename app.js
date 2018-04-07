@@ -8,39 +8,52 @@ const taskInput = document.querySelector('#task');
 // Load All Event listeners
 loadEventListeners();
 
-// Load All Evenet Listeners
+// Load All Event Listeners
 function loadEventListeners(){
   // Add Task Event
   form.addEventListener('submit', addTask);
+  // Remove task event
+  taskListUl.addEventListener('click', removeTask);
 }
 
-// Add Task Function
+// Add Task Function - user msg if empty
 function addTask(e){
-if (taskInput.value === "") {
-  alert('Add a Task');
+  if (taskInput.value === "") {
+    alert('Add a Task');
 } 
 
-// Create li element
-const li = document.createElement('li');
-// Add Class - materialize naming
-li.className = "collection-item";
-// Creat text node and append to li
-li.appendChild(document.createTextNode(taskInput.value));
-// Create new link element
-const link = document.createElement('a');
-// Add class name - 'secondary' =  side by side in materialize
-link.className = 'delete-item secondary-content';
-// Add Icon
-link.innerHTML = '<i class="fa fa-remove"></i>'
-// Append link to li
-li.appendChild(link);
+  // Create li element
+  const li = document.createElement('li');
+  // Add Class - materialize naming
+  li.className = "collection-item";
+  // Append user input to li
+  li.appendChild(document.createTextNode(taskInput.value));
 
-// Append li to ul
-taskListUl.appendChild(li);
+  // Create new link element
+  const link = document.createElement('a');
+  // Add class name - 'secondary' =  side by side in materialize
+  link.className = 'delete-item secondary-content';
+  // Add Icon
+  link.innerHTML = '<i class="fa fa-remove"></i>';
 
-// Clear input
-taskInput.value = '';
+  // Append link to li
+  li.appendChild(link);
 
+  // Append li to ul
+  taskListUl.appendChild(li);
 
-  e.preventDefault();
+  // Clear input on submit
+  taskInput.  value = '';
+
+    e.preventDefault();
+}
+
+// Remove Task
+function removeTask(e) {
+  if(e.target.parentElement.classList.contains('delete-item')) {
+    // i inside a inside li - remove the li
+    if(confirm('Are you sure?')){
+      e.target.parentElement.parentElement.remove();
+    }
+  }
 }
