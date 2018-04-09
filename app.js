@@ -12,7 +12,7 @@ loadEventListeners();
  // Load All Event Listeners
 function loadEventListeners(){
   // DOM load events
-  document.addEventListener('DOM.contentLoaded', getTasks);
+  document.addEventListener('DOMContentLoaded', getTasks);
   // Add Task Event
   form.addEventListener('submit', addTask);
   // Remove task event
@@ -23,7 +23,7 @@ function loadEventListeners(){
   filterBtn.addEventListener('keyup', filterTasks)
 }
 
-// GET Task from Local Storage
+// GET Tasks from Local Storage
 function getTasks() {
   let tasks;
   // check for pre existing tasks in local storage
@@ -49,6 +49,7 @@ function getTasks() {
   link.innerHTML = '<i class="fa fa-remove"></i>';
   // Append link to li
   li.appendChild(link);
+  
   // Append li to ul
   taskListUl.appendChild(li);
   });
@@ -96,7 +97,7 @@ function storeTaskInLocalStorage(task){
   if(localStorage.getItem('tasks') === null) {
     tasks = [];
   } else {
-    tasks = JSON.parse(localStorage.getItem('tasks') )
+    tasks = JSON.parse(localStorage.getItem('tasks'))
   }
   tasks.push(task);
 
