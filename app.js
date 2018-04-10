@@ -8,7 +8,6 @@ const taskInput = document.querySelector('#task');
 // Load All Event listeners
 loadEventListeners();
 
-
  // Load All Event Listeners
 function loadEventListeners(){
   // DOM load events
@@ -110,14 +109,43 @@ function removeTask(e) {
     // i inside a inside li - remove the li
     if(confirm('Are you sure?')){
       e.target.parentElement.parentElement.remove();
-      e.target.parentElement.parentElement.style.transition = "0.2s";
+
+      // Remove from Local Storage
+      removeTaskFromLocalStorage(e.target.parentElement.parentElement);//li
     }
   }
+}
+
+// Remove from LS
+function removeTaskFromLocalStorage(taskItem) {
+ let tasks;
+  // check for pre existing tasks in local storage
+  if(localStorage.getItem('tasks') === null) {
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'))
+  }
+
+  tasks.forEach(function(task, index) {
+    if(taskItem.textContent === task) {
+      tasks.splice(index, 1);
+    }
+  });
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 // Clear Tasks - while loop may be faster
 function clearTasks (){
   taskListUl.innerHTML = "";
+
+  // Clear Tasks from LS
+  clearTasksFromLocalStorage();
+}
+
+// Clear Task from LS
+function clearTasksFromLocalStorage() {
+  localStorage.clear();
 }
 
 // Filter Tasks
